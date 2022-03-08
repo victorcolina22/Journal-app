@@ -14,3 +14,46 @@
   padding: 20px;
   width: 250px;
 }
+
+.auth__title {
+  // la función darken(propia de sass) permite tomar un color como referencia e indicarle
+  // la cantidad de oscuridad que se le quiere dar a ese color.
+  color: darken($color: $primary, $amount: 20);
+  margin-bottom: 20px;
+}
+
+.auth__input {
+  color: $dark-grey;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  height: 20px;
+  width: 100%;
+  transition: border-bottom 0.3s ease;
+
+  // Es lo mismo que .auth__input:focus
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid $primary;
+  }
+}
+
+.auth__social-networks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0 20px 0;
+  width: 100%;
+}
+
+.auth__alert-error {
+  background-color: red;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 5px;
+}
