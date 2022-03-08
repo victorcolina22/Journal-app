@@ -7,7 +7,7 @@ export const JournalEntry = () => {
             <div
                 className="journal__entry-picture"
                 style={{
-                    backgroundImage: 'url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.kimley-horn.com%2Fservices%2Flandscape-architecture%2F&psig=AOvVaw3gY6oVZSP4LxP1Ir7pXfnd&ust=1646865277968000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKi-zcLJt_YCFQAAAAAdAAAAABA7)',
+                    backgroundImage: 'url(https://img.freepik.com/vector-gratis/hermoso-paisaje-primavera-degradado_23-2148448598.jpg?size=626&ext=jpg&ga=GA1.2.1522229396.1640476800)',
                     backgroundSize: 'cover'
                 }}>
 
