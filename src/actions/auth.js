@@ -3,6 +3,7 @@ import { firebase, googleAuthProvider } from '../firebase/firebase-config';
 
 
 export const startLoginEmailPassword = (email, password) => {
+    // Retorna un callback
     return (dispatch) => {
         setTimeout(() => {
             dispatch(login(123, 'Manuel'));
