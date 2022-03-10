@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import validator from 'validator';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeError, setError } from '../../actions/ui';
+
 
 export const RegisterScreen = () => {
 
+    // El useSelector es un hook de redux para obtener información del state dentro del redux.
+    const state = useSelector(state => state);
+    // Se saca del state la información del objeto al que queramos acceder.
+    const { msgError } = state.ui;
     const dispatch = useDispatch()
 
     const [formValue, handleInputChange] = useForm({
@@ -46,9 +51,12 @@ export const RegisterScreen = () => {
             <h3 className='auth__title'>Register</h3>
 
             <form onSubmit={handleRegister}>
-                <div className="auth__alert-error">
-                    Hola
-                </div>
+                {
+                    msgError !== null &&
+                    <div className="auth__alert-error">
+                        {msgError}
+                    </div>
+                }
 
                 <input
                     className='auth__input'
