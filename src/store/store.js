@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { authReducer } from "../reducers/authReducer";
 import thunk from 'redux-thunk'
+import { uiReducer } from "../reducers/uiReducer";
 
 
 
@@ -16,7 +17,8 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 // Se utiliza el "combineReducers()" porque "createStore" puede recibir solo un reducer directamente,
 // pero esta función nos permite agregar un objeto con varios reducers y así poder enviar más de uno.
 const reducers = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    ui: uiReducer
 })
 
 export const store = createStore(
