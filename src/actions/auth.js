@@ -11,6 +11,22 @@ export const startLoginEmailPassword = (email, password) => {
     }
 }
 
+export const startRegisterWithEmailPasswordName = (email, password, name) => {
+    return (dispatch) => {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(async ({ user }) => {
+                // El "createUserWithEmailAndPassword()" solo recibe como parámetros un email
+                // y una password, pero el nombre del usuario no nos lo proporciona, por ende
+                // existe una función propia de firebase que se llama "updateProfile()" en las
+                // nos permite modificar el name y así poder obtenerlo para nuestro uso.
+                await user.updateProfile({ displayName: name });
+                const { uid, displayName } = user;
+                dispatch(login(uid, displayName));
+            })
+            .catch(error => console.log(error));
+    }
+}
+
 export const startGoogleLogin = () => {
     return (dispatch) => {
         firebase.auth().signInWithPopup(googleAuthProvider)
