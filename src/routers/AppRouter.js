@@ -19,7 +19,7 @@ export const AppRouter = () => {
                 dispatch(login(uid, displayName));
             }
         })
-    }, []);
+    }, [dispatch]);
 
     return (
         <BrowserRouter>
