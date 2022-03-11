@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
@@ -9,6 +9,8 @@ export const LoginScreen = () => {
 
     // Este es un hook propio de react-redux que nos permite ejecutar una acción y poder
     // visualizarla en las devTool
+    const state = useSelector(state => state);
+    const { loading } = state.ui;
     const dispatch = useDispatch();
 
     const [formValues, handleInputChange] = useForm({
@@ -51,7 +53,8 @@ export const LoginScreen = () => {
 
                 <button
                     className='btn btn-primary btn-block'
-                    type='submit'>
+                    type='submit'
+                    disabled={loading}>
                     Login
                 </button>
 
