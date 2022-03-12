@@ -21,11 +21,10 @@ export const AppRouter = () => {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
-            const { uid, displayName } = user;
             // El signo "?" funciona en este caso preguntando primero que si el objeto "user"
             // contiene algo evaluará si existe el "uid", si no dará false.
             if (user?.uid) {
-                dispatch(login(uid, displayName));
+                dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
             } else {
                 setIsLoggedIn(false);
