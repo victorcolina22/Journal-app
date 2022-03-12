@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { JournalScreen } from '../components/journal/JournalScreen';
@@ -9,7 +9,10 @@ import { login } from '../actions/auth';
 
 
 export const AppRouter = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    const [checking, setChecking] = useState(true);
+
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             const { uid, displayName } = user;
@@ -18,8 +21,18 @@ export const AppRouter = () => {
             if (user?.uid) {
                 dispatch(login(uid, displayName));
             }
+
+            setChecking(false);
         })
-    }, [dispatch]);
+    }, [dispatch, setChecking]);
+
+    if (checking) {
+        return (
+            <div className='router__loading-page'>
+                <h1>Espere...</h1>
+            </div>
+        )
+    }
 
     return (
         <BrowserRouter>
