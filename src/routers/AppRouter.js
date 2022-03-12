@@ -11,6 +11,8 @@ import { login } from '../actions/auth';
 export const AppRouter = () => {
     const dispatch = useDispatch();
 
+    // Condicional para renderizar vista de loading-page al cargar la información traída de
+    // Firebase
     const [checking, setChecking] = useState(true);
 
     useEffect(() => {
