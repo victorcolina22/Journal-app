@@ -1,4 +1,5 @@
 import { db } from "../firebase/firebase-config";
+import { types } from "../types/types";
 
 
 export const startNewNotes = () => {
@@ -13,6 +14,17 @@ export const startNewNotes = () => {
         }
 
         const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
-        console.log(doc);
+
+        // Ejecución de la acción "activeNote".
+        dispatch(activeNote(doc.id, newNote));
     }
 }
+
+// Nueva acción para activar nota agregada para poder editarla, borrarla, etc.
+export const activeNote = (id, note) => ({
+    type: types.notesActive,
+    payload: {
+        id,
+        ...note
+    }
+})
