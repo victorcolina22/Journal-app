@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { loadNotes } from '../helpers/loadNotes';
+import { setNotes } from '../actions/notes';
 
 
 export const AppRouter = () => {
@@ -22,12 +24,14 @@ export const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             // El signo "?" funciona en este caso preguntando primero que si el objeto "user"
             // contiene algo evaluará si existe el "uid", si no dará false.
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
+                const notes = await loadNotes(user.uid);
+                dispatch(setNotes(notes));
             } else {
                 setIsLoggedIn(false);
             }
