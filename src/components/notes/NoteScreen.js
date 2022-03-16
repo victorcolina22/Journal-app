@@ -69,7 +69,7 @@ export const NoteScreen = () => {
                     (note.url) &&
                     <div className="notes__images">
                         <img
-                            src="https://www.kimley-horn.com/wp-content/uploads/2021/04/Centennial-Lakes-Bridge-at-Night.jpg"
+                            src={note.url}
                             alt="arboles" />
                     </div>
                 }

@@ -76,7 +76,22 @@ export const refreshNote = (id, note) => ({
 export const startUploading = (file) => {
     return async (dispatch, getState) => {
         const { active: activeNote } = getState().notes;
+
+        Swal.fire({
+            title: 'Uploading...',
+            text: 'Please wait...',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            showCloseButton: false,
+            showConfirmButton: false
+        });
+
         const fileUrl = await fileUpload(file);
-        console.log(fileUrl);
+        // Se le agrega el url al objeto
+        activeNote.url = fileUrl;
+
+        dispatch(startSaveNote(activeNote))
+
+        Swal.close();
     }
 }

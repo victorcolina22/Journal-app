@@ -54,7 +54,7 @@
 
 .journal__entry-picture {
   // height: 75px;
-  width: 100%;
+  width: 50%;
 }
 
 .journal__entry-body {
@@ -80,4 +80,8 @@
 
 .journal__entry-date-box span {
   font-size: 12px;
+}
+
+.journal__entry-date-box h4 {
+  margin-top: 5px;
 }
