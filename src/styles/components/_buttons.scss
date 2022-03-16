@@ -29,6 +29,16 @@
   }
 }
 
+.btn-danger {
+  background-color: $danger;
+  transition: 0.3s ease;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: darken($color: $primary, $amount: 2);
+  }
+}
+
 .btn-block {
   width: 100%;
 }
