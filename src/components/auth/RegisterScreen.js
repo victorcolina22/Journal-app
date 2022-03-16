@@ -8,10 +8,7 @@ import { startRegisterWithEmailPasswordName } from '../../actions/auth';
 
 
 export const RegisterScreen = () => {
-
-    // El useSelector es un hook de redux para obtener información del state dentro del redux.
     const state = useSelector(state => state);
-    // Se saca del state la información del objeto al que queramos acceder.
     const { msgError } = state.ui;
     const dispatch = useDispatch()
 

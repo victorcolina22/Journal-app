@@ -6,7 +6,6 @@ import { fileUpload } from "../helpers/fileUpload";
 
 
 export const startNewNotes = () => {
-    // La acción recibe un segundo argumento que sirve para obtener el state de redux.
     return async (dispatch, getState) => {
         const { uid } = getState().auth;
 
@@ -18,13 +17,11 @@ export const startNewNotes = () => {
 
         const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
 
-        // Ejecución de la acción "activeNote".
         dispatch(activeNote(doc.id, newNote));
         dispatch(addNewNote(doc.id, newNote));
     }
 }
 
-// Nueva acción para activar nota agregada para poder editarla, borrarla, etc.
 export const activeNote = (id, note) => ({
     type: types.notesActive,
     payload: {
@@ -96,7 +93,6 @@ export const startUploading = (file) => {
         });
 
         const fileUrl = await fileUpload(file);
-        // Se le agrega el url al objeto
         activeNote.url = fileUrl;
 
         dispatch(startSaveNote(activeNote))

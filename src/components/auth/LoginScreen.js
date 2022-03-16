@@ -6,9 +6,6 @@ import { useForm } from '../../hooks/useForm';
 
 
 export const LoginScreen = () => {
-
-    // Este es un hook propio de react-redux que nos permite ejecutar una acción y poder
-    // visualizarla en las devTool
     const state = useSelector(state => state);
     const { loading } = state.ui;
     const dispatch = useDispatch();

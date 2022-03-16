@@ -14,18 +14,12 @@ import { startLoadingNotes } from '../actions/notes';
 export const AppRouter = () => {
     const dispatch = useDispatch();
 
-    // Condicional para renderizar vista de loading-page al cargar la información traída de
-    // Firebase.
     const [checking, setChecking] = useState(true);
 
-    // Condicional para verificar si el usuario está autenticado y mostrar las rutas a las que
-    // puede acceder, sino se regresa al login.
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (user) => {
-            // El signo "?" funciona en este caso preguntando primero que si el objeto "user"
-            // contiene algo evaluará si existe el "uid", si no dará false.
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
