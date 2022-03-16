@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
+import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 
 
@@ -30,7 +30,7 @@ export const LoginScreen = () => {
     }
 
     return (
-        <>
+        <div className='animate__animated animate__fadeIn animate__faster'>
             <h3 className='auth__title'>Login</h3>
 
             <form onSubmit={handleLogin}>
@@ -76,6 +76,6 @@ export const LoginScreen = () => {
                     Create new account
                 </Link>
             </form>
-        </>
+        </div>
     )
 }
