@@ -54,6 +54,15 @@ export const startSaveNote = (note) => {
     return async (dispatch, getState) => {
         const { uid } = getState().auth;
 
+        Swal.fire({
+            title: 'Updating...',
+            text: 'Please wait...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
         if (!note.url) {
             delete note.url;
         }
@@ -64,7 +73,13 @@ export const startSaveNote = (note) => {
         await db.doc(`${uid}/journal/notes/${note.id}`).update(noteToFirestore);
 
         dispatch(refreshNote(note.id, noteToFirestore));
-        Swal.fire('Saved', note.title, 'success');
+        Swal.fire({
+            title: 'Saved',
+            text: note.title,
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        });
     }
 };
 
@@ -89,7 +104,10 @@ export const startUploading = (file) => {
             allowOutsideClick: false,
             allowEscapeKey: false,
             showCloseButton: false,
-            showConfirmButton: false
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
         });
 
         const fileUrl = await fileUpload(file);
@@ -104,11 +122,38 @@ export const startUploading = (file) => {
 export const startDeleting = (id) => {
     return async (dispatch, getState) => {
         const { uid } = getState().auth;
-        await db.doc(`${uid}/journal/notes/${id}`).delete();
-        dispatch(deleteNote(id));
-        Swal.fire('Deleted', 'Note deleted succesfully', 'success');
+
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Deleting...',
+                    text: 'Please wait...',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+
+                await db.doc(`${uid}/journal/notes/${id}`).delete();
+
+                dispatch(deleteNote(id));
+
+                Swal.fire({
+                    title: 'Deleted',
+                    text: 'Note deleted successfully',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
     }
-}
+};
 
 export const deleteNote = (id) => ({
     type: types.notesDelete,

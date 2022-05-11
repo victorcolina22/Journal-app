@@ -29,7 +29,8 @@ export const JournalEntry = ({ id, title, body, date, url }) => {
                     style={{
                         backgroundImage: `url(${url})`,
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center'
+                        backgroundPosition: 'center',
+                        objectFit: 'cover'
                     }}>
 
                 </div>
